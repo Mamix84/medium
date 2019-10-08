@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -29,3 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
+=======
+/bin/
+/target/
+>>>>>>> branch 'master' of https://github.com/Mamix84/medium.git
