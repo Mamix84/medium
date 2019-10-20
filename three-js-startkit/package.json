@@ -1,0 +1,25 @@
+{
+  "name": "three-js-startkit",
+  "version": "1.0.0",
+  "description": "Example of three.js project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mamix84/medium.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mamix84/medium/issues"
+  },
+  "homepage": "https://github.com/Mamix84/medium#readme",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "server-static": "^2.0.5",
+    "three": "^0.109.0"
+  }
+}
