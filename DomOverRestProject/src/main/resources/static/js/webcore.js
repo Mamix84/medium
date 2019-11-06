@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function load() {
 	console.log("OK");
 
@@ -25,4 +26,19 @@ function getComponent(tag, id) {
 	};
 	xhttp.open("GET", "/" + tag, true);
 	xhttp.send();
+=======
+
+
+function load(){
+	console.log("OK");
+
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("app").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("GET", "/app", true);
+	  xhttp.send();
+>>>>>>> branch 'master' of https://github.com/Mamix84/medium.git
 }
