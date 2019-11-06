@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 import it.mamino84.spring.core.WebComponent;
 
 @RestController
-public class AppComponent extends WebComponent{
+public class AppComponent extends WebComponent {
 
-	public AppComponent() {}
-	
+	public AppComponent() {
+	}
+
 	@GetMapping("/app")
 	public String getComponent() {
-		return "<style>"+getCSS()+"</style>"
-				+ getHTML();
+		return "<style>" + getCSS() + "</style>" + getHTML();
 	}
 
 	@Override
@@ -24,7 +24,6 @@ public class AppComponent extends WebComponent{
 	@Override
 	public String getCSS() {
 		return "";
-	}	
-	
+	}
+
 }
-	
