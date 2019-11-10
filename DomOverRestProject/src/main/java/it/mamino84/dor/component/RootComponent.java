@@ -1,23 +1,15 @@
-package it.mamino84.dor.controller;
+package it.mamino84.dor.component;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 import it.mamino84.dor.core.BaseComponent;
 import it.mamino84.dor.core.WebComponent;
 
-@RestController
-@BaseComponent(tag="root", html="app-root.html", css="app-root.css")
+@Controller
+@BaseComponent(tag = "app-root", html = "app-root.html", css = "app-root.css")
 public class RootComponent extends WebComponent {
 
 	public RootComponent() {
-	}
-
-	@RequestMapping("/app-root")
-	@Override
-	public String getComponent() {
-		//return "<style>" + getCSS() + "</style>" + getHTML();
-		return super.loadComponent();
 	}
 
 	@Override

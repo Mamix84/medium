@@ -23,6 +23,6 @@ function getComponent(tag, id) {
 			}
 		}
 	};
-	xhttp.open("GET", "/" + tag, true);
+	xhttp.open("GET", "/app?tag=" + tag, true);
 	xhttp.send();
 }
