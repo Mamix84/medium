@@ -1,4 +1,4 @@
-package it.mamino84.spring;
+package it.mamino84.dor;
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 

@@ -1,7 +1,7 @@
 function load() {
 	console.log("OK");
 
-	getComponent("app", "app");
+	getComponent("app-root", "app-root");
 }
 
 function getComponent(tag, id) {
