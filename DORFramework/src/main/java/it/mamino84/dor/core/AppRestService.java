@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.mamino84.dor.component.RootComponent;
+//import it.mamino84.dor.component.RootComponent;
 
 @RestController
 public class AppRestService {
@@ -18,9 +18,9 @@ public class AppRestService {
 	@ResponseBody
 	public String getComponent(@RequestParam String tag) {
 		
-		RootComponent root = new RootComponent();
+		//RootComponent root = new RootComponent();
 		
-		return root.getComponent();
+		return null;//root.getComponent();
 	}
 
 	@PostMapping("/app")
