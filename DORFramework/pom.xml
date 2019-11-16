@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>it.mamino84.dor</groupId>
-	<artifactId>core</artifactId>
+	<artifactId>dor-core</artifactId>
 	<version>0.0.1</version>
 
 	<dependencies>

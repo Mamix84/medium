@@ -1,5 +1,5 @@
 function load() {
-	console.log("OK");
+	console.log("OK - Framework");
 
 	getComponent("app-root", "app-root");
 }

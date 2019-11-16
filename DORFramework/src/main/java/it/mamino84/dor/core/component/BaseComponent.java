@@ -1,4 +1,4 @@
-package it.mamino84.dor.core;
+package it.mamino84.dor.core.component;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

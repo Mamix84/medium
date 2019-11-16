@@ -2,8 +2,8 @@ package it.mamino84.dor.component;
 
 import org.springframework.stereotype.Controller;
 
-import it.mamino84.dor.core.BaseComponent;
-import it.mamino84.dor.core.WebComponent;
+import it.mamino84.dor.core.component.BaseComponent;
+import it.mamino84.dor.core.component.WebComponent;
 
 @Controller
 @BaseComponent(tag = "app-root", html = "app-root.html", css = "app-root.css")
