@@ -1,5 +1,7 @@
 package it.mamino84.dor.core.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,9 @@ import it.mamino84.dor.core.dispatcher.impl.PostEventDispatcher;
 @RestController
 public class RootRestService {
 
+	@Autowired
+	private ApplicationContext appContext;
+	
 	public RootRestService() {
 	}
 
@@ -21,7 +26,7 @@ public class RootRestService {
 	@ResponseBody
 	public String getComponent(@RequestParam String tag) {
 		
-		GetComponentDispatcher rDispatcher = new GetComponentDispatcher();
+		GetComponentDispatcher rDispatcher = new GetComponentDispatcher(appContext);
 		
 		return (String) rDispatcher.dispatch(tag);
 	}

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan
+@ComponentScan("it.mamino84.dor")
 public class DomOverRestProjectApplication {
 
 	public static void main(String[] args) {

@@ -2,16 +2,22 @@ package it.mamino84.dor.core.dispatcher.impl;
 
 import java.lang.annotation.Annotation;
 
+import org.springframework.context.ApplicationContext;
+
 import it.mamino84.dor.core.component.WebComponent;
 import it.mamino84.dor.core.dispatcher.IDispatcher;
 import it.mamino84.dor.core.reader.impl.CSSResourceReader;
 import it.mamino84.dor.core.reader.impl.HTMLResourceReader;
+import it.mamino84.dor.core.resolver.impl.HTMLVariableResolver;
 import it.mamino84.dor.core.scanner.impl.WebComponentScanner;
 
 public class GetComponentDispatcher implements IDispatcher {
 
-	public GetComponentDispatcher() {
+	private ApplicationContext appContext;
+
+	public GetComponentDispatcher(ApplicationContext appContext) {
 		super();
+		this.appContext = appContext;
 	}
 
 	@Override
@@ -27,12 +33,7 @@ public class GetComponentDispatcher implements IDispatcher {
 
 		String view = "";
 
-		Class<WebComponent> obj = null;
-		try {
-			obj = (Class<WebComponent>) Class.forName(classComponentName).newInstance().getClass();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		Class<WebComponent> obj = (Class<WebComponent>) appContext.getBean(classComponentName).getClass();
 
 		// TODO: add Exception for obj null
 		if (obj.isAnnotationPresent(WebComponent.class)) {
@@ -48,6 +49,9 @@ public class GetComponentDispatcher implements IDispatcher {
 
 			CSSResourceReader cReader = new CSSResourceReader();
 			css = cReader.readResource(css);
+			
+			HTMLVariableResolver vResolver = new HTMLVariableResolver();
+			html = vResolver.variableResolve(appContext.getBean(classComponentName), html);
 
 			if (css == null || css.isEmpty()) {
 				view = html;
@@ -57,6 +61,14 @@ public class GetComponentDispatcher implements IDispatcher {
 		}
 
 		return view;
+	}
+
+	public ApplicationContext getAppContext() {
+		return appContext;
+	}
+
+	public void setAppContext(ApplicationContext appContext) {
+		this.appContext = appContext;
 	}
 
 }
