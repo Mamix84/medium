@@ -12,4 +12,8 @@ public class ButtonComponent {
 		super();
 	}
 
+	public String clickButton() {
+		return "OK";
+	}
+
 }

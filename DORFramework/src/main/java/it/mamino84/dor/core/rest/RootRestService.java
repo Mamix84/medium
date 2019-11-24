@@ -32,9 +32,9 @@ public class RootRestService {
 	}
 
 	@PostMapping("/app")
-	public Object postEvent(Object object) {
+	public String postEvent(Object object) {
 		PostEventDispatcher peDispatcher = new PostEventDispatcher();
 		
-		return peDispatcher.dispatch(object);
+		return (String) peDispatcher.dispatch(object);
 	}
 }

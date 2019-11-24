@@ -10,8 +10,8 @@ public class PostEventDispatcher implements IDispatcher {
 
 	@Override
 	public Object dispatch(Object request) {
-
-		return request;
+		System.out.println("POST EVENT OK");
+		return "ok";
 	}
 
 }

@@ -36,7 +36,8 @@ function getComponent(tag, tag_id) {
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById(children[i].nodeName.toLowerCase()).innerHTML = this.responseText;
+							document.getElementById(children[i].nodeName
+									.toLowerCase()).innerHTML = this.responseText;
 							getComponent(children[i].nodeName.toLowerCase(), id);
 						}
 					}
@@ -51,4 +52,18 @@ function getComponent(tag, tag_id) {
 		}
 
 	}
+}
+
+function postEvent(tag, tag_id) {
+	console.log("POST EVENT");
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+
+		}
+	}
+
+	xhttp.open("POST", "/app?tag=" + tag, true);
+	xhttp.send();
 }
