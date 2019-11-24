@@ -4,7 +4,9 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HTMLVariableResolver {
+import it.mamino84.dor.core.resolver.IResolver;
+
+public class HTMLVariableResolver implements IResolver {
 
 	public HTMLVariableResolver() {
 		super();
@@ -18,9 +20,9 @@ public class HTMLVariableResolver {
 			try {
 				variable.setAccessible(true);
 				mapVariable.put(variable.getName(), (String) variable.get(webComponent));
-				
-				html = html.replaceAll("#"+variable.getName()+"#", (String) variable.get(webComponent));
-				
+
+				html = html.replaceAll("#" + variable.getName() + "#", (String) variable.get(webComponent));
+
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

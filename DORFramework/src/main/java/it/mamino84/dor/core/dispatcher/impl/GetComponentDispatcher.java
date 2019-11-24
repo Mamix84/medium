@@ -6,9 +6,11 @@ import org.springframework.context.ApplicationContext;
 
 import it.mamino84.dor.core.component.WebComponent;
 import it.mamino84.dor.core.dispatcher.IDispatcher;
+import it.mamino84.dor.core.dto.AppRestResponse;
 import it.mamino84.dor.core.reader.impl.CSSResourceReader;
 import it.mamino84.dor.core.reader.impl.HTMLResourceReader;
 import it.mamino84.dor.core.resolver.impl.HTMLVariableResolver;
+import it.mamino84.dor.core.resolver.impl.IDAttributeResolver;
 import it.mamino84.dor.core.scanner.impl.WebComponentScanner;
 
 public class GetComponentDispatcher implements IDispatcher {
@@ -28,12 +30,12 @@ public class GetComponentDispatcher implements IDispatcher {
 
 		String classComponentName = (String) webComponentScanner.searchComponent(tag);
 
-		String html = "";
-		String css = "";
-
 		String view = "";
+		String html = "";
 
 		Class<WebComponent> obj = (Class<WebComponent>) appContext.getBean(classComponentName).getClass();
+		
+		AppRestResponse appRestResponse = new AppRestResponse();
 
 		// TODO: add Exception for obj null
 		if (obj.isAnnotationPresent(WebComponent.class)) {
@@ -42,25 +44,33 @@ public class GetComponentDispatcher implements IDispatcher {
 
 			tag = baseComponentInfo.tag();
 			html = baseComponentInfo.html();
-			css = baseComponentInfo.css();
+			String css = baseComponentInfo.css();
 
 			HTMLResourceReader rReader = new HTMLResourceReader();
 			html = rReader.readResource(html);
 
 			CSSResourceReader cReader = new CSSResourceReader();
 			css = cReader.readResource(css);
-			
+
 			HTMLVariableResolver vResolver = new HTMLVariableResolver();
 			html = vResolver.variableResolve(appContext.getBean(classComponentName), html);
+
+			IDAttributeResolver idResolver = new IDAttributeResolver();
+			view = idResolver.setIdAttribute(appContext.getBean(classComponentName), html);
+			
+			appRestResponse.setId("app-root");
 
 			if (css == null || css.isEmpty()) {
 				view = html;
 			} else {
 				view = "<style>" + css + "</style>" + html;
 			}
+			
+			appRestResponse.setHtml(html);
+
 		}
 
-		return view;
+		return appRestResponse;
 	}
 
 	public ApplicationContext getAppContext() {
