@@ -1,5 +1,7 @@
 package it.mamino84.dor.core.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import it.mamino84.dor.core.dto.AppRestResponse;
 @RestController
 public class RootRestService {
 
+	Logger logger = LoggerFactory.getLogger(RootRestService.class);
+
 	@Autowired
 	private ApplicationContext appContext;
 
@@ -26,16 +30,23 @@ public class RootRestService {
 	@GetMapping("/app")
 	@ResponseBody
 	public AppRestResponse getComponent(@RequestParam String tag) {
+		logger.debug("Start getComponent method");
 
 		GetComponentDispatcher rDispatcher = new GetComponentDispatcher(appContext);
-
-		return (AppRestResponse) rDispatcher.dispatch(tag);
+		AppRestResponse response = (AppRestResponse) rDispatcher.dispatch(tag);
+		
+		logger.debug("End getComponent method");
+		return response;
 	}
 
 	@PostMapping("/app")
 	public String postEvent(Object object) {
+		logger.debug("Start postEvent method");
 		PostEventDispatcher peDispatcher = new PostEventDispatcher();
 
-		return (String) peDispatcher.dispatch(object);
+		String response = (String) peDispatcher.dispatch(object);
+		
+		logger.debug("End postEvent method");
+		return response;
 	}
 }

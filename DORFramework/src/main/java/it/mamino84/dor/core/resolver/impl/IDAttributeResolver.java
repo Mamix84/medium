@@ -20,7 +20,7 @@ public class IDAttributeResolver implements IResolver {
 	}
 
 	public String setIdAttribute(Object webComponent, String html) {
-		System.out.println(html);
+		
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;

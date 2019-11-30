@@ -11,7 +11,10 @@ function getComponent(node, appCode) {
 	const children = node.childNodes;
 	const len = children.length;
 	for (let i = 0; i < len; i++) {
-		if (children[i].nodeType == 3
+		if(children[i].childNodes.length > 0){
+			getComponent(children[i], appCode);
+		}
+		else if (children[i].nodeType == 3
 				&& children[i].nodeValue.trim().startsWith('@' + appCode)) {
 
 			
@@ -40,8 +43,12 @@ function getComponent(node, appCode) {
 	}
 }
 
-function postEvent(tag, tag_id) {
+function postEvent(node, appCode) {
 	console.log("POST EVENT");
+	
+	if(!node.tagName.trim().startsWith('@' + appCode)){
+		node = getParentComponent(node, appCode);
+	}
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -50,6 +57,15 @@ function postEvent(tag, tag_id) {
 		}
 	}
 
-	xhttp.open("POST", "/app?tag=" + tag, true);
+	xhttp.open("POST", "/app?tag=" + node.tagName.toLowerCase(), true);
 	xhttp.send();
+}
+
+function getParentComponent(node, appCode) {
+	
+	if(node.parentNode != null && node.parentNode.tagName.trim().startsWith(appCode.toUpperCase() + "-")){
+		return node.parentNode;
+	}else{
+		return getParentComponent(node.parentNode, appCode);
+	}
 }
