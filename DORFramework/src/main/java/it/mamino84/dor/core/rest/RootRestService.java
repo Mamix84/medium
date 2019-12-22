@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.mamino84.dor.core.dispatcher.impl.GetComponentDispatcher;
 import it.mamino84.dor.core.dispatcher.impl.PostEventDispatcher;
+import it.mamino84.dor.core.dto.AppRestRequest;
 import it.mamino84.dor.core.dto.AppRestResponse;
 
 //import it.mamino84.dor.component.RootComponent;
@@ -34,18 +35,18 @@ public class RootRestService {
 
 		GetComponentDispatcher rDispatcher = new GetComponentDispatcher(appContext);
 		AppRestResponse response = (AppRestResponse) rDispatcher.dispatch(tag);
-		
+
 		logger.debug("End getComponent method");
 		return response;
 	}
 
 	@PostMapping("/app")
-	public String postEvent(Object object) {
+	public AppRestResponse postEvent(@RequestParam String tag, AppRestRequest object) {
 		logger.debug("Start postEvent method");
-		PostEventDispatcher peDispatcher = new PostEventDispatcher();
+		PostEventDispatcher peDispatcher = new PostEventDispatcher(appContext);
 
-		String response = (String) peDispatcher.dispatch(object);
-		
+		AppRestResponse response = (AppRestResponse) peDispatcher.dispatch(tag, object);
+
 		logger.debug("End postEvent method");
 		return response;
 	}

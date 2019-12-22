@@ -19,6 +19,7 @@ public class HTMLVariableResolver implements IResolver {
 		for (Field variable : variables) {
 			try {
 				variable.setAccessible(true);
+				//TODO: create annotation for input variable
 				mapVariable.put(variable.getName(), (String) variable.get(webComponent));
 
 				html = html.replaceAll("#" + variable.getName() + "#", (String) variable.get(webComponent));

@@ -29,7 +29,7 @@ function getComponent(node, appCode) {
 					var response = JSON.parse(this.responseText.trim()); 
 					
 					template.innerHTML = response.html;
-					node.appendChild(template.content.firstChild);
+					node.appendChild(template.content);
 					
 					getComponent(document.getElementById(response.id), appCode);
 				}

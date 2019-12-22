@@ -2,5 +2,7 @@ package it.mamino84.dor.core.dispatcher;
 
 public interface IDispatcher {
 
-	public Object dispatch(Object request);
+	public Object dispatch(String tag);
+	
+	public Object dispatch(String tag, Object request);
 }

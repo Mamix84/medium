@@ -23,18 +23,15 @@ public class GetComponentDispatcher implements IDispatcher {
 	}
 
 	@Override
-	public Object dispatch(Object request) {
-		String tag = (String) request;
-
+	public Object dispatch(String tag) {
 		WebComponentScanner webComponentScanner = new WebComponentScanner();
 
 		String classComponentName = (String) webComponentScanner.searchComponent(tag);
-
 		String view = "";
 		String html = "";
 
 		Class<WebComponent> obj = (Class<WebComponent>) appContext.getBean(classComponentName).getClass();
-		
+
 		AppRestResponse appRestResponse = new AppRestResponse();
 
 		// TODO: add Exception for obj null
@@ -57,7 +54,7 @@ public class GetComponentDispatcher implements IDispatcher {
 
 			IDAttributeResolver idResolver = new IDAttributeResolver();
 			view = idResolver.setIdAttribute(appContext.getBean(classComponentName), html);
-			
+
 			appRestResponse.setId("app-root");
 
 			if (css == null || css.isEmpty()) {
@@ -65,12 +62,18 @@ public class GetComponentDispatcher implements IDispatcher {
 			} else {
 				view = "<style>" + css + "</style>" + html;
 			}
-			
-			appRestResponse.setHtml(html);
+
+			appRestResponse.setHtml(view);
 
 		}
 
 		return appRestResponse;
+	}
+
+	@Override
+	public Object dispatch(String tag, Object request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public ApplicationContext getAppContext() {
