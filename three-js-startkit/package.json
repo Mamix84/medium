@@ -20,6 +20,6 @@
   "dependencies": {
     "connect": "^3.7.0",
     "server-static": "^2.0.5",
-    "three": "^0.109.0"
+    "three": "^0.125.0"
   }
 }
